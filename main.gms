@@ -1110,6 +1110,13 @@ parameter
 ;
   cm_EnSecScen_limit = 0; !! def = 0
 *'
+parameter
+ c_emifac_red_coal          "switch to adjust the emission factor of all technologies involving PE coal"
+*** This switch allows to flexibly adjust the emission factor in all usages of coal as primary energy ressource.
+*** (1)                 default, leaves emission factor unchanged
+*** (any number>1)      increases emission factor of burning coal as PE
+*** (any number<1)      decreases emission factor of burning coal as PE
+*'                
 ***-----------------------------------------------------------------------------
 *' ####                     FLAGS
 ***-----------------------------------------------------------------------------

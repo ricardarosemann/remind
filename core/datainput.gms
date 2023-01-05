@@ -387,6 +387,9 @@ pm_emifac(ttot,regi,enty,enty2,te,"n2o")$emi2te(enty,enty2,te,"n2o") = 0.905 * f
 pm_emifac(t,regi,"pecoal","sesofos","coaltr","ch4") = 9.46 * (1-pm_share_ind_fesos("2005",regi));
 pm_emifac(t,regi,"pebiolc","sesobio","biotr","ch4") = 9.46 * (1-pm_share_ind_fesos_bio("2005",regi));
 
+pm_emifac(t,regi,"pecoal",enty2,te,"co2")$emi2te("pecoal",enty2,te,"co2") = c_emifac_red_coal
+    * pm_emifac(t,regi,"pecoal",enty2,te,"co2")$emi2te("pecoal",enty2,te,"co2");
+
 display pm_emifac;
 
 *MLB* initialization needed as include file represents only parameters that are different from zero
