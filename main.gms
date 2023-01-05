@@ -1116,6 +1116,8 @@ parameter
 *** (1)                 default, leaves emission factor unchanged
 *** (any number>1)      increases emission factor of burning coal as PE
 *** (any number<1)      decreases emission factor of burning coal as PE
+;
+  cm_emifac_red_coal = 1; !! def = 1
 *'                
 ***-----------------------------------------------------------------------------
 *' ####                     FLAGS
