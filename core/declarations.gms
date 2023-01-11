@@ -15,6 +15,7 @@ parameters
 
 ***----------------------------------------------------------------------------------------
 ***--------------------------------------------------MACRO module--------------------------
+***
 ***prices
 pm_pvp(ttot,all_enty)                                "Price on commodity markets",
 p_pvpRef(ttot,all_enty)                              "Price on commodity markets - imported from REF gdx",
@@ -305,6 +306,7 @@ p_share_seel_s(ttot,all_regi)                        "Share of electricity used 
 
 p_discountedLifetime(all_te)                         "Sum over the discounted (@6%) depreciation factor (omega)"
 p_teAnnuity(all_te)                                  "Annuity factor of a technology"
+
 ;
 
 ***----------------------------------------------------------------------------------------
@@ -343,8 +345,8 @@ vm_costFuBio(ttot,all_regi)                          "fuel costs from bio energy
 vm_omcosts_cdr(tall,all_regi)                        "O&M costs for spreading grinded rocks on fields"
 vm_costpollution(tall,all_regi)                      "costs for air pollution policies"
 vm_emiFgas(ttot,all_regi,all_enty)                   "F-gas emissions by single gases from IMAGE"
-v_emiTeDetailMkt(tall,all_regi,all_enty,all_enty,all_te,all_enty,all_emiMkt) "emissions from fuel combustion per region, technology and emission market. [GtC, Mt CH4, Mt N]"
-v_emiTeMkt(tall,all_regi,all_enty,all_emiMkt)       "total energy-emissions of each region and emission market. [GtC, Mt CH4, Mt N]"
+vm_emiTeDetailMkt(tall,all_regi,all_enty,all_enty,all_te,all_enty,all_emiMkt) "emissions from fuel combustion per region, technology and emission market. [GtC, Mt CH4, Mt N]"
+vm_emiTeMkt(tall,all_regi,all_enty,all_emiMkt)       "total energy-emissions of each region and emission market. [GtC, Mt CH4, Mt N]"
 v_emiEnFuelEx(ttot,all_regi,all_enty)                 "energy emissions from fuel extraction [GtC, Mt CH4, Mt N]"
 vm_emiAllMkt(tall,all_regi,all_enty,all_emiMkt)      "total regional emissions for each emission market. [GtC, Mt CH4, Mt N]"
 vm_flexAdj(tall,all_regi,all_te)                     "flexibility adjustment used for flexibility subsidy (tax) to emulate price changes of technologies which see lower-than-average (higher-than-average) elec. prices [trUSD/TWa]"
@@ -352,6 +354,7 @@ vm_costCESMkup(ttot,all_regi,all_in)                  "CES markup cost to repres
 vm_taxrevimplicitQttyTargetTax(ttot,all_regi)        "quantity target bound implemented through implict tax"
 vm_taxrevimplicitPriceTax(ttot,all_regi,entySe,all_enty,sector)   "final energy price target implemented through implict tax"
 vm_taxrevimplicitPePriceTax(ttot,all_regi,all_enty)  "primary energy price target implemented through implict tax"
+
 ;
 
 ***----------------------------------------------------------------------------------------
@@ -413,6 +416,7 @@ vm_emiCdrAll(ttot,all_regi)                          "all CDR emissions"
 
 *** ES layer variables
 vm_demFeForEs(ttot,all_regi,all_enty,all_esty,all_teEs)     "Final energy which will be used in the ES layer."
+
 vm_prodEs(ttot,all_regi,all_enty,all_esty,all_teEs)          "Energy services (unit determined by conversion factor pm_fe2es)."
 vm_transpGDPscale(ttot,all_regi)                            "dampening factor to align edge-t non-energy transportation costs with historical GDP data"  
 
@@ -532,7 +536,6 @@ $IFTHEN.sehe_upper not "%cm_sehe_upper%" == "off"
 q_heat_limit(ttot,all_regi)  "equation to limit maximum level of secondary energy district heating and heat pumps use"
 $ENDIF.sehe_upper
 
-
 ***----------------------------------------------------------------------------------------
 ***----------------------------------------------trade module------------------------------
 
@@ -599,6 +602,8 @@ s_actualbudgetco2_last                                "actual level of 2020-2100
 sm_globalBudget_dev                                   "actual level of global cumulated emissions budget divided by target budget"
 
 sm_eps                                                "small number: 1e-9 "  /1e-9/
+
+sm_CES_calibration_iteration                          "current calibration iteration number, loaded from environment variable cm_CES_calibration_iteration"  /0/
 
 ***----------------------------------------------------------------------------------------
 ***----------------------------------------------trade module------------------------------
