@@ -1094,6 +1094,19 @@ parameter
 *'
 *' * (0)                default, equals "off", no limit imposed
 *' * (any other number) limit of gas demand from 2025 on in Germany in EJ/yr
+parameter
+  cm_build_overwriteH2Calibration  "switch to control which calibration results of H2 in buildings should be overwritten"
+;
+  cm_build_overwriteH2Calibration = 0; !! def 0
+*' This switch allows to overwrite certain calibration results on the usage of H2 in buildings by results obtained for
+*' gaseous energy carriers
+*'  (0)  default, no calibration results are overwritten
+*'  (1)  only overwrite results on efficiency
+*'  (2)  only overwrite results on efficiency growth
+*'  (3)  overwrite both results on efficiency and on efficiency growth.
+*'  (4)  only overwrite results on xi
+*'  (5)  overwrite all calibration results, i.e. eff, effgr and xi
+*'  (6)  eliminate efficiency growth, i.e. set it to one
 *'
 ***-----------------------------------------------------------------------------
 *' ####                     FLAGS

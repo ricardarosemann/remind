@@ -11,6 +11,18 @@
 $include "./modules/29_CES_parameters/load/input/indu_subsectors-buil_simple-tran_edge_esm-POP_pop_SSP2EU-GDP_gdp_SSP2EU-En_gdp_SSP2EU-Kap_debt_limit-Reg_62eff8f7.inc"
 *###################### R SECTION END (CES INPUT) ###########################
 
+if ((cm_build_overwriteH2Calibration = 1) or (cm_build_overwriteH2Calibration = 3) or (cm_build_overwriteH2Calibration = 5),
+  pm_cesdata(t,regi,"feh2b","eff") = pm_cesdata(t,regi,"fegab","eff");
+);
+if ((cm_build_overwriteH2Calibration = 2) or (cm_build_overwriteH2Calibration = 3) or (cm_build_overwriteH2Calibration = 5),
+  pm_cesdata(t,regi,"feh2b","effGr") = pm_cesdata(t,regi,"fegab","effGr");
+);
+if ((cm_build_overwriteH2Calibration = 4) or (cm_build_overwriteH2Calibration = 5),
+  pm_cesdata(t,regi,"feh2b","xi") = pm_cesdata(t,regi,"fegab","xi");
+);
+if ((cm_build_overwriteH2Calibration = 6),
+  pm_cesdata(t,regi,"feh2b","effGr") = 1;
+);
 
 option pm_cesdata:8:3:1;
 display "loaded pm_cesdata", pm_cesdata;
