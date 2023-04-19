@@ -28,6 +28,10 @@ eff_scale_par   "parameters for scaling certain efficiencies during calibration"
   midperiod
   width
 /
+
+tnovw(ttot)  "time during which CES parameters are not overwritten"
 ;
+
+tnovw(ttot)$(ttot.val lt cm_start_overwriteCES) = Yes;
 *** EOF ./modules/29_CES_parameters/load/sets.gms
 

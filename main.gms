@@ -1107,6 +1107,13 @@ parameter
 *'  (4)  only overwrite results on xi
 *'  (5)  overwrite all calibration results, i.e. eff, effgr and xi
 *'  (6)  eliminate efficiency growth, i.e. set it to one
+parameter
+  cm_start_overwriteCES  "switch to control from which year onwards calibration results of H2 in buildings should be overwritten"
+;
+  cm_start_overwriteCES = 2005; !! def 2005
+*' This switch specifies the first year for which CES calibration results on the usage of H2 in buildings are overwritten.
+*' It does not take any effect if cm_build_overwriteH2Calibration is set to 0.
+*' The default is 2005, the default start year of the model.
 *'
 ***-----------------------------------------------------------------------------
 *' ####                     FLAGS
