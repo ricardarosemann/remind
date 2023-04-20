@@ -1114,6 +1114,13 @@ parameter
 *' This switch specifies the first year for which CES calibration results on the usage of H2 in buildings are overwritten.
 *' It does not take any effect if cm_build_overwriteH2Calibration is set to 0.
 *' The default is 2005, the default start year of the model.
+parameter
+  cm_noH2inBuildings  "switch to control whether usage of hydrogen in buildings is suppressed until 2025"
+;
+  cm_noH2inBuildings = 0; !! def 0
+*' With this switch, the default behavior to suppress the usage of hydrogen in buildings until 2025 can be switched off.
+*'  (0) default, hydrogen can only be used in buildings from 2030 onwards
+*'  (1) The usage of hydrogen in buildings is not limited.
 *'
 ***-----------------------------------------------------------------------------
 *' ####                     FLAGS
