@@ -1118,6 +1118,14 @@ parameter
 *'  (1) The usage of hydrogen in buildings is not limited.
 *'
 parameter
+  cm_feh2bOffset  "Switch to control how the offset quantity of feh2b is realized"
+;
+  cm_feh2bOffset = 0; !! def 0
+*' With this switch it can be chosen how the offset quantity in pm_cesdata for feh2b is computed
+*'  (0) default, the offset rises from 1 % in 2025 to 50 % in 2050 of the fegab quantity
+*'  (any other number x) the offset remains constant at a fraction of x of fegab quantity (i.e. x*100 %)
+*'
+parameter
   c_SlackMultiplier   "Muliplicative factor to up/downscale the slack size for v_changeProdStartyearSlack"
 ;
   c_SlackMultiplier = 1; !! def 1
