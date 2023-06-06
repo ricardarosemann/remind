@@ -27,11 +27,16 @@ pm_cesdata_sigma(ttot,in)$ (pm_ttot_val(ttot) eq 2035  AND sameAs(in, "enhb")) =
 pm_cesdata_sigma(ttot,in)$ (pm_ttot_val(ttot) eq 2040  AND sameAs(in, "enhb")) = 2.0;
 pm_cesdata_sigma(ttot,in)$ (pm_ttot_val(ttot) eq 2045  AND sameAs(in, "enhb")) = 2.5;
 
-pm_cesdata_sigma(ttot,"enhgab")$ (ttot.val le 2020) = 0.1;
-pm_cesdata_sigma(ttot,"enhgab")$ (ttot.val eq 2025) = 0.6;
-pm_cesdata_sigma(ttot,"enhgab")$ (ttot.val eq 2030) = 1.2;
-pm_cesdata_sigma(ttot,"enhgab")$ (ttot.val eq 2035) = 2;
-pm_cesdata_sigma(ttot,"enhgab")$ (ttot.val eq 2040) = 3;
+if(cm_enhgabSigma = 0,
+  pm_cesdata_sigma(ttot,"enhgab")$ (ttot.val le 2020) = 0.1;
+  pm_cesdata_sigma(ttot,"enhgab")$ (ttot.val eq 2025) = 0.6;
+  pm_cesdata_sigma(ttot,"enhgab")$ (ttot.val eq 2030) = 1.2;
+  pm_cesdata_sigma(ttot,"enhgab")$ (ttot.val eq 2035) = 2;
+  pm_cesdata_sigma(ttot,"enhgab")$ (ttot.val eq 2040) = 3;
+else
+  display cm_enhgabSigma;
+  pm_cesdata_sigma(ttot, "enhgab") = cm_enhgabSigma;
+);
 
 
 *** floor space demand for reporting

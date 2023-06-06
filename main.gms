@@ -1126,6 +1126,13 @@ parameter
 *'  (any other number x) the offset remains constant at a fraction of x of fegab quantity (i.e. x*100 %)
 *'
 parameter
+  cm_enhgabSigma  "Switch to control the behavior of sigma for enhgab"
+;
+  cm_enhgabSigma = 0; !! def 0
+*' With this switch the behavior of sigma for the output enhgab can be modified
+*'  (0) default, sigma rises from 0.1 in 2025 to 5 in 2050
+*'  (any other number x) Sigma remains constant at the value x. Usually, x should be positive
+parameter
   c_SlackMultiplier   "Muliplicative factor to up/downscale the slack size for v_changeProdStartyearSlack"
 ;
   c_SlackMultiplier = 1; !! def 1
