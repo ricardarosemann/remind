@@ -439,6 +439,16 @@ if (cm_feh2bOffset = 0,
     = (0.05 + 0.45 * min(1, max(0, (t.val - 2025) / (2050 - 2025))))
       * pm_cesdata(t,regi,"fegab","quantity");
   );
+elseif cm_feh2bOffset = -1,
+  loop ((t,regi),
+	  pm_cesdata(t,regi,"feh2b","offset_quantity")
+    = - (0.05 + 0.20 * min(1, max(0, (t.val - 2025) / (2070 - 2025))))
+      * pm_cesdata(t,regi,"fegab","quantity")
+      - pm_cesdata(t,regi,"feh2b","quantity");
+	  pm_cesdata(t,regi,"feh2b","quantity") 
+    = (0.05 + 0.20 * min(1, max(0, (t.val - 2025) / (2070 - 2025))))
+      * pm_cesdata(t,regi,"fegab","quantity");
+  );
 else
 *** Assuming feh2b minimum levels as 5% of fegab to avoid CES numerical calibration issues and allow more aligned efficiencies between gas and h2
   loop ((t,regi)$(pm_cesdata(t,regi,"feh2b","quantity") lt (cm_feh2bOffset*pm_cesdata(t,regi,"fegab","quantity"))),
