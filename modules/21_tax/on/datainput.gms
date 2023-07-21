@@ -95,6 +95,10 @@ if(cm_fetaxscen eq 0,
   p21_tau_fuEx_sub(ttot,regi,all_enty) = 0;
 );
 
+if(cm_subsH2Extreme <> 0,
+  pm_tau_fe_sub(ttot, all_regi, "build", "feh2s")$(ttot.val ge 2005) = cm_subsH2Extreme;
+);
+
 *** -------------------------PE2SE Taxes--------------------------(Primary to secondary energy technology taxes, specified by technology)
 *** cb 20110923 load paths for technology taxes, subsidies and inconvenience costs 
 p21_tau_pe2se_tax(tall,regi,te) = 0;

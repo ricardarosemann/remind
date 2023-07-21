@@ -1134,6 +1134,13 @@ parameter
 *'  (0) default, sigma rises from 0.1 in 2025 to 5 in 2050
 *'  (any other number x) Sigma remains constant at the value x. Usually, x should be positive
 parameter
+  cm_subsH2Extreme  "Switch to control specific subsidies for H2 in buildings"
+;
+  cm_subsH2Extreme = 0; !! def 0
+*' This switch allows to introduce a specific subsidy only for H2 in buildings
+*'  (0) default, no (special) subsidy on H2
+*'  (any other number x) The subsidy for each year and in each region is set to x.
+parameter
   c_SlackMultiplier   "Muliplicative factor to up/downscale the slack size for v_changeProdStartyearSlack"
 ;
   c_SlackMultiplier = 1; !! def 1
