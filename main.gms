@@ -301,7 +301,7 @@ $setglobal fossil  grades2poly        !! def = grades2poly
 *'
 *' * (IntC)      :    Power sector formulation with Integration Cost (IntC) markups and curtailment for VRE integration - linearly increasing with VRE share -, and fixed capacity factors for dispatchable power plants
 *' * (RLDC)      :    Power sector formulation with Residual Load Duration Curve (RLDC) formulation for VRE power integration, and flexible capacity factors for dispatchable power plants
-*' * (DTcoup)    :    Power sector formulation with iterative coupling to hourly power-sector model DIETER: REMIND gives DIETER costs of technologies, power demand, CO2 price and capacity bounds; DIETER gives REMIND markups of generation, capacity factors, peak hourly residual demand
+*' * (DTcoup)    :    (currently not merged, only a copy of IntC) Power sector formulation with iterative coupling to hourly power-sector model DIETER: REMIND gives DIETER costs of technologies, power demand, CO2 price and capacity bounds; DIETER gives REMIND markups of generation, capacity factors, peak hourly residual demand
 $setglobal power  IntC        !! def = IntC
 *'---------------------    33_CDR       ----------------------------------------
 *'
@@ -870,6 +870,17 @@ parameter
   cm_postTargetIncrease    = 0;      !! def = 0
 *'
 parameter
+  cm_emiMktTarget_tolerance "tolerance for regipol emission target deviations convergence."
+;
+  cm_emiMktTarget_tolerance    = 0.01;       !! def = 0.01, i.e. regipol emission targets must be met within 1% of target deviation
+*'  For budget targets the tolerance is measured relative to the target value. For year targets the tolerance is relative to 2005 emissions.
+*'
+parameter
+  cm_implicitQttyTarget_tolerance "tolerance for regipol implicit quantity target deviations convergence."
+;
+  cm_implicitQttyTarget_tolerance    = 0.01;       !! def = 0.01, i.e. regipol implicit quantity targets must be met within 1% of target deviation
+*'
+parameter
   cm_emiMktTargetDelay  "number of years for delayed price change in the emission tax convergence algorithm. Not applied to first target set."
 ;
   cm_emiMktTargetDelay    = 0;       !! def = 0
@@ -929,6 +940,11 @@ parameter
 ;
   cm_noReboundEffect     = 0;
 *'  price sensitivity of logit function for heating and cooking technological choice
+parameter
+  c_H2InBuildOnlyAfter "Switch to fix H2 in buildings to zero until given year"
+;
+  c_H2InBuildOnlyAfter = 2025;   !! def = 2025 (H2 in buildings not allowed for later time periods)
+*' For all years until the given year, FE demand for H2 in buildings is set to zero
 parameter
   cm_priceSensiBuild    "Price sensitivity of energy carrier choice in buildings"
 ;
@@ -1109,14 +1125,6 @@ parameter
 *' This switch specifies the first year for which CES calibration results on the usage of H2 in buildings are overwritten.
 *' It does not take any effect if cm_build_overwriteH2Calibration is set to 0.
 *' The default is 2005, the default start year of the model.
-parameter
-  cm_noH2inBuildings  "switch to control whether usage of hydrogen in buildings is suppressed until 2025"
-;
-  cm_noH2inBuildings = 0; !! def 0
-*' With this switch, the default behavior to suppress the usage of hydrogen in buildings until 2025 can be switched off.
-*'  (0) default, hydrogen can only be used in buildings from 2030 onwards
-*'  (1) The usage of hydrogen in buildings is not limited.
-*'
 parameter
   cm_feh2bOffset  "Switch to control how the offset quantity of feh2b is realized"
 ;
@@ -1305,6 +1313,7 @@ $setGlobal cm_vehiclesSubsidies  off !! def = off
 ***     cm_implicitQttyTarget to "2050.GLO.sub.s.FE.electricity 0.8". The p47_implicitQttyTargetTax parameter will contain the subsidy necessary to achieve that goal.
 ***       Enforce a subsidy (sub) that guarantees a minimum share (s) of electricity in final energy (FE.electricity) equal to 80% (0.8) from 2050 (2050) onward in all World (GLO) regions.
 ***       The p47_implicitQttyTargetTax parameter will contain the subsidy necessary to achieve that goal.
+***     To limit CCS to 8 GtCO2 and BECCS to 5 GtCO2, use "2050.GLO.tax.t.CCS.all 8000, 2050.GLO.tax.t.CCS.biomass 5000"
 $setGlobal cm_implicitQttyTarget  off !! def = off
 *** cm_loadFromGDX_implicitQttyTargetTax "load p47_implicitQttyTargetTax values from gdx for first iteration. Usefull for policy runs."
 $setGlobal cm_loadFromGDX_implicitQttyTargetTax  off !! def = off
