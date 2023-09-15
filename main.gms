@@ -1128,12 +1128,24 @@ parameter
 parameter
   cm_feh2bOffset  "Switch to control how the offset quantity of feh2b is realized"
 ;
-  cm_feh2bOffset = 0; !! def 0
+  cm_feh2bOffset = 1; !! def 1
 *' With this switch it can be chosen how the offset quantity in pm_cesdata for feh2b is computed
-*'  (0) default, the offset rises from 5 % in 2025 to 50 % in 2050 of the fegab quantity
-*'  (-1) alternative path, the offset rises from 5 % in 2025 to 25 % in 2070 of th fegab quantity
-*'  (any other number x) the offset remains constant at a fraction of x of fegab quantity (i.e. x*100 %)
+*'  (1) default, the offset rises linearly from 5 % of the fegab quantity in 2025 to its maximum in the end year, both specified below
+*'  (2) the offset rises quadratically, from 5% of fegab quantity in 2025 to its maximum in 2050
+*'  (0) the offset remains constant at a fraction of fegab quantity as given by cm_feh2bOffsetMaxval
 *'
+parameter
+  cm_feh2bOffsetEndyear  "Switch to control the year until which the offset increases"
+;
+  cm_feh2bOffsetEndyear = 2050; !! def 2050
+*' This switch specifies the end year until which the offset of feh2b is increasing.
+*' After that, the offset remains constant.
+parameter
+  cm_feh2bOffsetMaxval  "Switch to set the maximum offset of feh2b"
+;
+  cm_feh2bOffsetMaxval = 0.5; !! def 0.5
+*' This switch controls the maximum offset quantity in pm_cesdata for feh2b as a fraction of fegab quantity.
+*' In particular, if the offset is constant, it sets the constant value.
 parameter
   cm_enhgabSigma  "Switch to control the behavior of sigma for enhgab"
 ;

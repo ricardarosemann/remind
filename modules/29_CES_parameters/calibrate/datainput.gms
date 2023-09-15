@@ -428,32 +428,37 @@ $endif.indst_H2_offset
 
 $ifthen.build_H2_offset "%buildings%" == "simple"
 
-if (cm_feh2bOffset = 0,
+*** Set offset to constant if the end year of offset increase is before or equal to the respective start year
+if (cm_feh2bOffsetEndyear le 2025,
+  cm_feh2bOffset = 0;
+)
+
+if (cm_feh2bOffset = 1,
 *** RK: feh2b offset scaled from 1% in 2025 to 50% in 2050 of fegab quantity
   loop ((t,regi),
 	  pm_cesdata(t,regi,"feh2b","offset_quantity")
-    = - (0.05 + 0.45 * min(1, max(0, (t.val - 2025) / (2050 - 2025))))
+    = - (0.05 + (cm_feh2bOffsetMaxval - 0.05) * min(1, max(0, (t.val - 2025) / (cm_feh2bOffsetEndyear - 2025))))
       * pm_cesdata(t,regi,"fegab","quantity")
       - pm_cesdata(t,regi,"feh2b","quantity");
 	  pm_cesdata(t,regi,"feh2b","quantity") 
-    = (0.05 + 0.45 * min(1, max(0, (t.val - 2025) / (2050 - 2025))))
+    = (0.05 + (cm_feh2bOffsetMaxval - 0.05) * min(1, max(0, (t.val - 2025) / (cm_feh2bOffsetEndyear - 2025))))
       * pm_cesdata(t,regi,"fegab","quantity");
   );
-elseif cm_feh2bOffset = -1,
+elseif cm_feh2bOffset = 2,
   loop ((t,regi),
 	  pm_cesdata(t,regi,"feh2b","offset_quantity")
-    = - (0.05 + 0.20 * min(1, max(0, (t.val - 2025) / (2070 - 2025))))
+    = - (0.05 + (cm_feh2bOffsetMaxval - 0.05) * min(1, (t.val - 2025) * max(0, (t.val - 2025) / (cm_feh2bOffsetEndyear - 2025)**2)))
       * pm_cesdata(t,regi,"fegab","quantity")
       - pm_cesdata(t,regi,"feh2b","quantity");
 	  pm_cesdata(t,regi,"feh2b","quantity") 
-    = (0.05 + 0.20 * min(1, max(0, (t.val - 2025) / (2070 - 2025))))
+    = (0.05 + (cm_feh2bOffsetMaxval - 0.05) * min(1, (t.val - 2025) * max(0, (t.val - 2025) / (cm_feh2bOffsetEndyear - 2025)**2)))
       * pm_cesdata(t,regi,"fegab","quantity");
   );
 else
-*** Assuming feh2b minimum levels as 5% of fegab to avoid CES numerical calibration issues and allow more aligned efficiencies between gas and h2
-  loop ((t,regi)$(pm_cesdata(t,regi,"feh2b","quantity") lt (cm_feh2bOffset*pm_cesdata(t,regi,"fegab","quantity"))),
-    pm_cesdata(t,regi,"feh2b","offset_quantity") = - (cm_feh2bOffset * pm_cesdata(t,regi,"fegab","quantity") - pm_cesdata(t,regi,"feh2b","quantity"));
-    pm_cesdata(t,regi,"feh2b","quantity") = cm_feh2bOffset * pm_cesdata(t,regi,"fegab","quantity");
+*** Assuming feh2b minimum levels as a fixed fraction of fegab to avoid CES numerical calibration issues and allow more aligned efficiencies between gas and h2
+  loop ((t,regi)$(pm_cesdata(t,regi,"feh2b","quantity") lt (cm_feh2bOffsetMaxval*pm_cesdata(t,regi,"fegab","quantity"))),
+    pm_cesdata(t,regi,"feh2b","offset_quantity") = - (cm_feh2bOffsetMaxval * pm_cesdata(t,regi,"fegab","quantity") - pm_cesdata(t,regi,"feh2b","quantity"));
+    pm_cesdata(t,regi,"feh2b","quantity") = cm_feh2bOffsetMaxval * pm_cesdata(t,regi,"fegab","quantity");
   );
 );
 $endif.build_H2_offset
