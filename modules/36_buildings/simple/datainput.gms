@@ -33,6 +33,23 @@ if(cm_enhgabSigma = 0,
   pm_cesdata_sigma(ttot,"enhgab")$ (ttot.val eq 2030) = 1.2;
   pm_cesdata_sigma(ttot,"enhgab")$ (ttot.val eq 2035) = 2;
   pm_cesdata_sigma(ttot,"enhgab")$ (ttot.val eq 2040) = 3;
+elseif cm_enhgabSigma = -1,  !! rise is slower
+  pm_cesdata_sigma(ttot,"enhgab")$ (ttot.val le 2020) = 0.1;
+  pm_cesdata_sigma(ttot,"enhgab")$ (ttot.val eq 2025) = 0.35;
+  pm_cesdata_sigma(ttot,"enhgab")$ (ttot.val eq 2030) = 0.6;
+  pm_cesdata_sigma(ttot,"enhgab")$ (ttot.val eq 2035) = 0.9;
+  pm_cesdata_sigma(ttot,"enhgab")$ (ttot.val eq 2040) = 1.2;
+  pm_cesdata_sigma(ttot,"enhgab")$ (ttot.val eq 2045) = 1.6;
+  pm_cesdata_sigma(ttot,"enhgab")$ (ttot.val eq 2050) = 2;
+  pm_cesdata_sigma(ttot,"enhgab")$ (ttot.val eq 2055) = 2.5;
+  pm_cesdata_sigma(ttot,"enhgab")$ (ttot.val eq 2060) = 3;
+  pm_cesdata_sigma(ttot,"enhgab")$ (ttot.val eq 2065) = 4;
+elseif cm_enhgabSigma = -2,  !! rise starts later
+  pm_cesdata_sigma(ttot,"enhgab")$ (ttot.val le 2045) = 0.1;
+  pm_cesdata_sigma(ttot,"enhgab")$ (ttot.val eq 2050) = 0.6;
+  pm_cesdata_sigma(ttot,"enhgab")$ (ttot.val eq 2055) = 1.2;
+  pm_cesdata_sigma(ttot,"enhgab")$ (ttot.val eq 2060) = 2;
+  pm_cesdata_sigma(ttot,"enhgab")$ (ttot.val eq 2065) = 3;
 else
   display cm_enhgabSigma;
   pm_cesdata_sigma(ttot, "enhgab") = cm_enhgabSigma;

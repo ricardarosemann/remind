@@ -1151,7 +1151,9 @@ parameter
 ;
   cm_enhgabSigma = 0; !! def 0
 *' With this switch the behavior of sigma for the output enhgab can be modified
-*'  (0) default, sigma rises from 0.1 in 2025 to 5 in 2050
+*'  (0) default, sigma rises from 0.1 in 2020 to 5 in 2045
+*'  (-1) sigma rises slower: from 0.1 in 2020 to 5 in 2070
+*'  (-2) sigma rises later: from 0.1 in 2045 to 5 in 2070
 *'  (any other number x) Sigma remains constant at the value x. Usually, x should be positive
 parameter
   cm_subsH2Extreme  "Switch to control specific subsidies for H2 in buildings"
