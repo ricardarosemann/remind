@@ -1675,6 +1675,10 @@ $setglobal c_CES_calibration_iterations  10     !!  def  =  10
 $setglobal c_CES_calibration_industry_FE_target  1
 $setglobal c_testOneRegi_region  EUR       !! def = EUR
 $setglobal cm_fixCO2price  off !! def = off
+*** Flag to modify computation of H2 phase-in costs in buildings
+*' standard    as in default implementation
+*' cumulative  the quantity used is the cumulative H2 share
+$setglobal cm_build_H2costAddComp  standard  !! def = standard
 
 *' @stop
 

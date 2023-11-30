@@ -55,12 +55,27 @@ q36_auxCostAddTeInv(t,regi)..
   v36_costExponent(t,regi)
   =e=
   10 / (cm_build_H2costDecayEnd - cm_build_H2costDecayStart) 
-  * (v36_H2share(t,regi) + 1e-7
+  * (v36_quantCostExp(t,regi) + 1e-7
      - (cm_build_H2costDecayEnd + cm_build_H2costDecayStart) / 2
     )
   - v36_expSlack(t,regi)
 ;
 
+* If the corresponding flag is set, compute the phase in costs from the cumulative share
+$ifThen.quantityComp "%cm_build_H2costAddComp%" == "cumulative"
+q36_quantCostExp(t, regi)..
+  v36_quantCostExp(t, regi)
+  =e=
+  sum(t2$(t2.val le t.val),
+    v36_H2share(t2,regi))
+;
+$else.quantityComp
+q36_quantCostExp(t, regi)..
+  v36_quantCostExp(t, regi)
+  =e=
+  v36_H2share(t,regi)
+;
+$endIf.quantityComp
 
 *' Hydrogen fe share in buildings gases use (natural gas + hydrogen)
 q36_H2Share(t,regi)..
