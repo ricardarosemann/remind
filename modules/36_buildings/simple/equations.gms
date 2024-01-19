@@ -63,11 +63,13 @@ q36_auxCostAddTeInv(t,regi)..
 
 * If the corresponding flag is set, compute the phase in costs from the cumulative share
 $ifThen.quantityComp "%cm_build_H2costAddComp%" == "cumulative"
-q36_quantCostExp(t, regi)..
-  v36_quantCostExp(t, regi)
+q36_quantCostExp(ttot, regi)$(ttot.val ge cm_startyear)..
+  v36_quantCostExp(ttot, regi)
   =e=
-  sum(t2$(t2.val le t.val),
-    v36_H2share(t2,regi))
+  (v36_H2share(ttot, regi)
+  + v36_H2share(ttot-1, regi)$(ttot.val > cm_startyear)
+  + v36_H2share(ttot, regi)$(ttot.val = cm_startyear))
+  / 2
 ;
 $else.quantityComp
 q36_quantCostExp(t, regi)..

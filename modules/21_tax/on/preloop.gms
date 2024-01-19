@@ -135,6 +135,10 @@ $ifthen.fetaxRel not "%cm_FEtax_trajectory_rel%" == "off"
   );
 $endif.fetaxRel
 
+if(cm_subsH2Extreme <> 0,
+  pm_tau_fe_sub(ttot, all_regi, "build", "feh2s")$(ttot.val ge 2005) = cm_subsH2Extreme;
+);
+
 display pm_tau_fe_sub; 
 display pm_tau_fe_tax;
 display p21_tau_pe2se_sub, p21_tau_fuEx_sub;
