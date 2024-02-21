@@ -24,5 +24,9 @@ if (cm_build_H2costAddH2Inv <> 0,
 );
 $endif.CES_calibration
 
+$ifThen.boundDem "%cm_bound_limitFe%" == "demFe"
+  v36_H2share.up(t, regi) = 0.5;
+$endIf.boundDem
+
 
 *** EOF ./modules/36_buildings/simple/bounds.gms

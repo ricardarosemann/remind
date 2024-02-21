@@ -82,8 +82,7 @@ $endIf.quantityComp
 *' Hydrogen fe share in buildings gases use (natural gas + hydrogen)
 q36_H2Share(t,regi)..
   v36_H2share(t,regi) 
-  * sum(se2fe(entySe,entyFe,te)$(SAMEAS(entyFe,"feh2s")
-                                 OR SAMEAS(entyFe,"fegas")),   
+  * sum(se2fe(entySe,entyFe,te)$(entyFe36_H2Share(entyFe)),   
         vm_demFeSector_afterTax(t,regi,entySe,entyFe,"build","ES"))
   =e=
   sum(se2fe(entySe,entyFe,te)$SAMEAS(entyFe,"feh2s"),

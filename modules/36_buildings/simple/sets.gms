@@ -44,6 +44,32 @@ Sets
     feels
   /
 
+  entyFe36_H2Share(all_enty)   "FE carriers in the denominator of H2 share compuation"
+$ifThen.feDenom "%cm_build_H2costAddDenom%" == "gases"
+  /
+    fegas
+    feh2s
+  /
+$elseIf.feDenom "%cm_build_H2costAddDenom%" == "all"
+  /
+    fesos 
+    fehos 
+    fegas
+    feh2s
+    fehes
+    feels
+  /
+$elseIf.feDenom "%cm_build_H2costAddDenom%" == "allHeat"
+  /
+    fesos
+    fehos
+    fegas
+    feh2s
+    fehes
+  /
+$endIf.feDenom
+    
+
   fe2ppfEn36(all_enty,all_in)   "match ESM entyFe to ppfEn"
   /
     fesos . fesob

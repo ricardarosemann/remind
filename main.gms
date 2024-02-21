@@ -1679,6 +1679,16 @@ $setglobal cm_fixCO2price  off !! def = off
 *' standard    as in default implementation
 *' cumulative  the quantity used is the cumulative H2 share
 $setglobal cm_build_H2costAddComp  standard  !! def = standard
+*** Flag to specify the denominator in the H2 share for computation of H2 phase-In costs
+*' gases    sum of hydrogen and fossil gas
+*' all      sum of all FE carrier applied in buildings
+*' allHeat  sum of all FE carrier applied in buildings except for feels
+$setglobal cm_build_H2costAddDenom  gases
+*** Flag to set which quantity should be bounded to limit H2 usage
+*' none     no additional bound
+*' taxrev   bound vm_taxrev
+*' demFe    bound vm_demFeSector_afterTax
+$setglobal cm_bound_limitFe  none
 
 *' @stop
 
