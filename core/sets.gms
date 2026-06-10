@@ -64,6 +64,7 @@ all_demScen    "all possible demand scenarios"
     SSP2_highDemDEU   "High-demand scenario in industry and transport for Germany, rest of the world has SSP2 standard demand trajectories"
     SSP2IndiaMedium
     SSP2IndiaHigh
+    SSP2_GP
 /
 
 all_SSP_forcing_adjust  "all possible forcing targets and budgets according to SSP scenario such that magicc forcing meets the target"
